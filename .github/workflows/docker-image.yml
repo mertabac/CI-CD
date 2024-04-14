@@ -1,0 +1,33 @@
+# .github/workflows/ci.yml
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - development
+  pull_request:
+    branches:
+      - main
+      - development
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Repo'yu Checkout Et
+      uses: actions/checkout@v3
+
+    - name: Docker Image'ını Build Et
+      run: |
+        docker build -t my-python-app .
+
+    - name: Docker Container'ı Çalıştır
+      run: |
+        docker run my-python-app
+
+    - name: Development için Ek Adımlar
+      if: github.ref == 'refs/heads/development'
+      run: |
+        echo "Development branch üzerinde ek testler veya işlemler burada yapılabilir."
