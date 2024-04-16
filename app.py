@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-print("Hello")
-=======
 import yfinance as yf
 import mplfinance as mpf
 
@@ -27,4 +24,3 @@ def main():
 if __name__ == "__main__":
     main()
 
->>>>>>> Stashed changes
