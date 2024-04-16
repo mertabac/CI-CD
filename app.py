@@ -1,5 +1,7 @@
 import yfinance as yf
 import mplfinance as mpf
+import numpy as np
+
 
 def plot_candlestick(symbol, period="1mo", interval="1h"):
     ticker = yf.Ticker(symbol)
