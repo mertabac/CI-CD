@@ -6,7 +6,7 @@ on:
       - main
       - develop
     paths:
-      - 'analysis_funcs.py'
+      - 'app.py'
       - 'requirements.txt'
 
 jobs:
