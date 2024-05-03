@@ -1,0 +1,34 @@
+name: Update Dockerfile
+
+on:
+  push:
+    branches:
+      - main
+      - develop  # develop dalını da ekledim
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create or Update Dockerfile
+        run: |
+          cat > Dockerfile <<EOF
+          # Örnek Dockerfile, projenize uygun olarak düzenleyin:
+          FROM python:3.8-slim
+          WORKDIR /app
+          COPY . .
+          RUN pip install -r requirements.txt
+          CMD ["python", "app.py"]
+          EOF
+
+      - name: Commit Dockerfile
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add Dockerfile
+          git commit -m "Automatically update Dockerfile" || echo "No changes to commit"
+          git push
