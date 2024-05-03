@@ -1,0 +1,36 @@
+name: Create or Update Dockerfile
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - '**.py'
+      - 'requirements.txt'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create or Update Dockerfile
+        run: |
+          cat > Dockerfile <<EOF
+          FROM python:3.11.4-slim
+          WORKDIR /app
+          COPY . .
+          RUN pip install --no-cache-dir -r requirements.txt
+          CMD ["python", "analysis_funcs.py"]
+          EOF
+
+      - name: Commit Dockerfile
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add Dockerfile
+          git commit -m "Automatically update Dockerfile" || echo "No changes to commit"
+          git push
