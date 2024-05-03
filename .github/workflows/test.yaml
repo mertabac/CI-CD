@@ -1,10 +1,13 @@
-name: Update Dockerfile
+name: Create or Update Dockerfile
 
 on:
   push:
     branches:
       - main
-      - develop  # develop dalını da ekledim
+      - develop
+    paths:
+      - '**.py'
+      - 'requirements.txt'
 
 jobs:
   build:
@@ -17,12 +20,11 @@ jobs:
       - name: Create or Update Dockerfile
         run: |
           cat > Dockerfile <<EOF
-          # Örnek Dockerfile, projenize uygun olarak düzenleyin:
-          FROM python:3.8-slim
+          FROM python:3.11.4-slim
           WORKDIR /app
           COPY . .
-          RUN pip install -r requirements.txt
-          CMD ["python", "app.py"]
+          RUN pip install --no-cache-dir -r requirements.txt
+          CMD ["python", "analysis_funcs.py"]
           EOF
 
       - name: Commit Dockerfile
