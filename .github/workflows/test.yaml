@@ -6,7 +6,7 @@ on:
       - main
       - develop
     paths:
-      - '**.py'
+      - 'analysis_funcs.py'
       - 'requirements.txt'
 
 jobs:
@@ -29,8 +29,8 @@ jobs:
 
       - name: Commit Dockerfile
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "mert_292@hotmail.com.com"
+          git config --local user.name "mertabac"
           git add Dockerfile
           git commit -m "Automatically update Dockerfile" || echo "No changes to commit"
           git push
